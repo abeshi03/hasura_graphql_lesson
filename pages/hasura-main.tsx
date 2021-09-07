@@ -6,7 +6,13 @@ import { GetUsersQuery } from '../types/generated/graphql'
 import { Layout } from '../components/Layout'
 
 const FetchMain: VFC = () => {
-  const { data, error } = useQuery<GetUsersQuery>(GET_USERS)
+  const { data, error, loading } = useQuery<GetUsersQuery>(GET_USERS)
+  if (loading)
+    return (
+      <Layout title="Hasura fetchPolicy">
+        <p>ローディング中だよん♪</p>
+      </Layout>
+    )
   if (error)
     return (
       <Layout title="Hasura fetchPolicy">
